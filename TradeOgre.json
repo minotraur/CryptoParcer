@@ -1,0 +1,5 @@
+{
+  "Grimm": "https://tradeogre.com/api/v1/ticker/BTC-GRIMM",
+  "Raven": "https://tradeogre.com/api/v1/ticker/BTC-RVN",
+  "Etherium": "https://tradeogre.com/api/v1/ticker/BTC-ETH"
+}
