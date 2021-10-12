@@ -1,6 +1,0 @@
-{
-  "BTC-RUB": "https://api.coinbase.com/v2/prices/BTC-RUB/buy",
-  "BTC-USD": "https://api.coinbase.com/v2/prices/BTC-USD/buy",
-  "ETH-RUB": "https://api.coinbase.com/v2/prices/ETH-RUB/buy",
-  "ETH-USD": "https://api.coinbase.com/v2/prices/ETH-USD/buy"
-}

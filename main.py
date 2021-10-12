@@ -6,9 +6,9 @@ import json
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
 
-path_for_coinbase = 'CoinBase.json'
+path_for_coinbase = 'Json\CoinBase.json'
 #{'data': {'base': 'BTC', 'currency': 'RUB', 'amount': '4145594.69'}}
-path_for_tradeogre = 'TradeOgre.json'
+path_for_tradeogre = 'Json\TradeOgre.json'
 #{'success': True, 'initialprice': '0.06252515', 'price': '0.06147607', 'high': '0.06422734', 'low': '0.05502624', 'volume': '3.39374699', 'bid': '0.06070103', 'ask': '0.06178323'}
 
 class DataThread(QThread):
@@ -52,7 +52,8 @@ class Ui_MainWindow(object):
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint)
         MainWindow.setWindowFlags(flags)
-        self.setWindowIcon(QtGui.QIcon("Monogram-CP-Logo-by-Greenlines-Studios.ico"))
+        # MainWindow.setWindowIcon(QtGui.QIcon("Monogram-CP-Logo-by-Greenlines-Studios.ico"))
+        # self.setWindowIcon(QtGui.QIcon("ravencoin-rvn-logo.png"))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.b = QtWidgets.QWidget(self.centralwidget)
@@ -170,28 +171,28 @@ class Ui_MainWindow(object):
         self.label_BTC = QtWidgets.QLabel(self.centralwidget)
         self.label_BTC.setGeometry(QtCore.QRect(10, 50, 81, 101))
         self.label_BTC.setObjectName("label_BTC")
-        self.label_BTC.setPixmap(QtGui.QPixmap("BTC.webp"))
+        self.label_BTC.setPixmap(QtGui.QPixmap("Logo\BTC.webp"))
 
         self.label_ETH = QtWidgets.QLabel(self.centralwidget)
         self.label_ETH.setGeometry(QtCore.QRect(10, 180, 61, 81))
         self.label_ETH.setObjectName("label_ETH")
-        self.label_ETH.setPixmap(QtGui.QPixmap("Ethereum_logo_2014.svg"))
+        self.label_ETH.setPixmap(QtGui.QPixmap("Logo\Ethereum_logo_2014.svg"))
         self.label_ETH.setScaledContents(True)
 
         self.label_GRIMM = QtWidgets.QLabel(self.centralwidget)
         self.label_GRIMM.setGeometry(QtCore.QRect(10, 300, 101, 81))
         self.label_GRIMM.setObjectName("label_GRIMM")
-        self.label_GRIMM.setPixmap(QtGui.QPixmap("GRIMM.webp"))
+        self.label_GRIMM.setPixmap(QtGui.QPixmap("Logo\GRIMM.webp"))
 
         self.label_RVN = QtWidgets.QLabel(self.centralwidget)
         self.label_RVN.setGeometry(QtCore.QRect(-5, 420, 91, 81))
         self.label_RVN.setObjectName("label_RVN")
-        self.label_RVN.setPixmap(QtGui.QPixmap("ravencoin-rvn-logo.png"))
+        self.label_RVN.setPixmap(QtGui.QPixmap("Logo/ravencoin-rvn-logo.png"))
         self.label_RVN.setScaledContents(True)
 
         self.label_BTC_NAME = QtWidgets.QLabel(self.centralwidget)
         self.label_BTC_NAME.setGeometry(QtCore.QRect(10, 150, 101, 16))
-        self.label_BTC_NAME.setObjectName("label_BTC_NAME")
+        self.label_BTC_NAME.setObjectName("Logo\label_BTC_NAME")
         # ----------------LOGO----------------
 
 
@@ -498,7 +499,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.setWindowIcon(QtGui.QIcon("Monogram-CP-Logo-by-Greenlines-Studios.ico"))
+        self.setWindowIcon(QtGui.QIcon("Logo\CP.png"))
         self.setText()
         self._old_pos = None
 
