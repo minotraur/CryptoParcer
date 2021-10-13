@@ -23,18 +23,29 @@ class DataThread(QThread):
             with open(path_for_coinbase, 'r') as f:
                 self.data = json.loads(f.read())
                 for value in self.data:
-                    resp = req.get(self.data[value]).json()
                     text = value
+                    response = req.get(self.data[value])
+                    try:
+                        response.raise_for_status()
+                    except req.exceptions.HTTPError:
+                        self.setText.emit(text, 'NDA ({}).'.format(response.status_code))
+                        continue
+                    resp = response.json()
                     price = '{}'.format("{:,.0f}".format(float(resp.get('data').get('amount'))))
                     self.setText.emit(text, price)
             with open(path_for_tradeogre, 'r') as f:
                 self.data = json.loads(f.read())
                 for value in self.data:
-                    resp = req.get(self.data[value]).json()
                     text = value
+                    response = req.get(self.data[value])
+                    try:
+                        response.raise_for_status()
+                    except req.exceptions.HTTPError:
+                        self.setText.emit(text,'NDA ({}).'.format(response.status_code)+';'+'NDA ({})'.format(response.status_code))
+                        continue
+                    resp = response.json()
                     price = resp.get('price')+';'+resp.get('high')
                     self.setText.emit(text, price)
-
 
             #self.setText.emit(text,Abob)
             time.sleep(10)
