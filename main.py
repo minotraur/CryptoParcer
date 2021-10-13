@@ -63,8 +63,6 @@ class Ui_MainWindow(object):
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint)
         MainWindow.setWindowFlags(flags)
-        # MainWindow.setWindowIcon(QtGui.QIcon("Monogram-CP-Logo-by-Greenlines-Studios.ico"))
-        # self.setWindowIcon(QtGui.QIcon("ravencoin-rvn-logo.png"))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.b = QtWidgets.QWidget(self.centralwidget)
@@ -496,7 +494,6 @@ class Ui_MainWindow(object):
             list = value.split(';')
             self.label_RVN_NOW.setText(list[0])
             self.label_RVN_HIGH.setText(list[1])
-        #print(text+"___"+value)
 
     def Close_Event(self):
         sys.exit()
@@ -513,6 +510,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon("Logo\CP.png"))
         self.setText()
         self._old_pos = None
+        self.OnTopCheck = 0
+        self.OnTopButton = QtWidgets.QPushButton(self.centralwidget)
+        self.OnTopButton.setGeometry(0, 0, 50, 25)
+        self.OnTopButton.setObjectName("OnTopButton")
+        self.OnTopButton.setText('Поверх \nОкон')
+        self.OnTopButton.setStyleSheet("font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+        self.OnTopButton.clicked.connect(self.StaysOnTopHint)
+
+    def StaysOnTopHint(self):
+        if(self.OnTopCheck == 0):
+            self.setWindowFlags(QtCore.Qt.FramelessWindowHint|QtCore.Qt.WindowStaysOnTopHint)
+            self.OnTopCheck = 1
+            self.OnTopButton.setStyleSheet("font: 11px; background: green;; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+        else:
+            self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+            self.OnTopCheck = 0
+            self.OnTopButton.setStyleSheet("font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+        self.show()
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
