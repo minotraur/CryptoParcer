@@ -7,9 +7,10 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QThread, pyqtSignal
 
 path_for_coinbase = 'Json\CoinBase.json'
-#{'data': {'base': 'BTC', 'currency': 'RUB', 'amount': '4145594.69'}}
+# {'data': {'base': 'BTC', 'currency': 'RUB', 'amount': '4145594.69'}}
+
 path_for_tradeogre = 'Json\TradeOgre.json'
-#{'success': True, 'initialprice': '0.06252515', 'price': '0.06147607', 'high': '0.06422734', 'low': '0.05502624', 'volume': '3.39374699', 'bid': '0.06070103', 'ask': '0.06178323'}
+# {'success': True, 'initialprice': '0.06252515', 'price': '0.06147607', 'high': '0.06422734', 'low': '0.05502624', 'volume': '3.39374699', 'bid': '0.06070103', 'ask': '0.06178323'}
 
 class DataThread(QThread):
     setText = pyqtSignal(str, str)
@@ -41,18 +42,17 @@ class DataThread(QThread):
                     try:
                         response.raise_for_status()
                     except req.exceptions.HTTPError:
-                        self.setText.emit(text,'NDA ({}).'.format(response.status_code)+';'+'NDA ({})'.format(response.status_code))
+                        self.setText.emit(text, 'NDA ({}).'.format(response.status_code) + ';' + 'NDA ({})'.format(
+                            response.status_code))
                         continue
                     resp = response.json()
-                    price = resp.get('price')+';'+resp.get('high')
+                    price = resp.get('price') + ';' + resp.get('high')
                     self.setText.emit(text, price)
 
-            #self.setText.emit(text,Abob)
             time.sleep(10)
 
 
 class Ui_MainWindow(object):
-    # TODO Сделать нормальный интерфейс
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
@@ -69,8 +69,9 @@ class Ui_MainWindow(object):
         self.b.setGeometry(QtCore.QRect(0, 0, MainWindow.width(), MainWindow.height()))
         self.b.setStyleSheet("background-color: rgba(0, 0, 0, 80%); border:1px; border-radius: 25px;")
         self.CloseButton = QtWidgets.QToolButton(self.centralwidget)
-        self.CloseButton.setGeometry(210,0,50,25)
-        self.CloseButton.setStyleSheet("font: 20px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+        self.CloseButton.setGeometry(210, 0, 50, 25)
+        self.CloseButton.setStyleSheet(
+            "font: 20px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
         self.CloseButton.setObjectName("closeButton")
         self.CloseButton.clicked.connect(self.Close_Event)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -176,7 +177,7 @@ class Ui_MainWindow(object):
         self.line_17.raise_()
         self.line_18.raise_()
 
-        #----------------LOGO----------------
+        # ----------------LOGO----------------
         self.label_BTC = QtWidgets.QLabel(self.centralwidget)
         self.label_BTC.setGeometry(QtCore.QRect(10, 50, 81, 101))
         self.label_BTC.setObjectName("label_BTC")
@@ -203,7 +204,6 @@ class Ui_MainWindow(object):
         self.label_BTC_NAME.setGeometry(QtCore.QRect(10, 150, 101, 16))
         self.label_BTC_NAME.setObjectName("Logo\label_BTC_NAME")
         # ----------------LOGO----------------
-
 
         # ----------------NAME----------------
         self.label_BTC_NAME = QtWidgets.QLabel(self.centralwidget)
@@ -250,7 +250,6 @@ class Ui_MainWindow(object):
         self.label_RVN_NAME.setFont(font)
         self.label_RVN_NAME.setObjectName("label_RVN_NAME")
         # ----------------NAME----------------
-
 
         # ----------------VALUE----------------
         self.label_BTC_USD = QtWidgets.QLabel(self.centralwidget)
@@ -446,11 +445,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Криптовалютный парсер"))
-        self.CloseButton.setText(_translate("MainWindow","X"))
+        self.CloseButton.setText(_translate("MainWindow", "X"))
         self.label_BTC_NAME.setText(_translate("MainWindow", "Bitcoin"))
         self.label_ETH_NAME.setText(_translate("MainWindow", "Etherium"))
         self.label_GRIMM_NAME.setText(_translate("MainWindow", "Grimm"))
@@ -478,7 +476,7 @@ class Ui_MainWindow(object):
         self.TextEd.start()
 
     def TextToEditor(self, text, value):
-        if(text == "BTC-RUB"):
+        if (text == "BTC-RUB"):
             self.label_BTC_RUB.setText(value)
         elif (text == "BTC-USD"):
             self.label_BTC_USD.setText(value)
@@ -499,7 +497,6 @@ class Ui_MainWindow(object):
         sys.exit()
 
 
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -515,18 +512,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.OnTopButton.setGeometry(0, 0, 50, 25)
         self.OnTopButton.setObjectName("OnTopButton")
         self.OnTopButton.setText('Поверх \nОкон')
-        self.OnTopButton.setStyleSheet("font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+        self.OnTopButton.setStyleSheet(
+            "font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
         self.OnTopButton.clicked.connect(self.StaysOnTopHint)
 
     def StaysOnTopHint(self):
-        if(self.OnTopCheck == 0):
-            self.setWindowFlags(QtCore.Qt.FramelessWindowHint|QtCore.Qt.WindowStaysOnTopHint)
+        if (self.OnTopCheck == 0):
+            self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
             self.OnTopCheck = 1
-            self.OnTopButton.setStyleSheet("font: 11px; background: green;; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+            self.OnTopButton.setStyleSheet(
+                "font: 11px; background: green;; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
         else:
             self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
             self.OnTopCheck = 0
-            self.OnTopButton.setStyleSheet("font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
+            self.OnTopButton.setStyleSheet(
+                "font: 11px; background: red; border-width: 20px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius:10px;")
         self.show()
 
     def mousePressEvent(self, event):
@@ -546,11 +546,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
-    # MainWindow = QtWidgets.QMainWindow()
-    # ui = MainWindow()
-    # ui.setupUi(MainWindow)
-    # ui.show()
     w = MainWindow()
     w.show()
     sys.exit(app.exec_())
